@@ -4,7 +4,11 @@
 
 Let's play High Card! It's an exciting game of luck, skill, and... actually, just luck.
 
-Modify `main.js` so that the game executes properly! No need to touch `index.html`.
+You can play a [working version of this game here](https://git.generalassemb.ly/pages/parisyee/high-card-js-solution/).
+Play a few times to really understand how its supposed to work.
+
+Now, modify `main.js` so that the game executes properly! No need to touch
+`index.html`, although you will need to open it in your browser to get up and running.
 
 The "interface" for this game consists entirely of alert boxes (aka dialog boxes)
 in your web browser. If you get stuck in an infinite loop of alert boxes, note
