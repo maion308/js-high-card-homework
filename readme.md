@@ -85,3 +85,9 @@ cards. Keep track of who has won the most rounds. Announce them as the winner.
 
 Make this game run as an actual webpage -- not in alert boxes.
 
+# Submission
+
+- This assignment is **due at 11:00 PM on Sunday night, April 29th, 2018.**
+- Fork and clone this repo, finish your work and push it up.
+- Submit an issue ticket on **this** repository with you **full name as the title** and the **link to your forked repository as the issue body**.
+
