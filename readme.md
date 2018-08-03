@@ -2,92 +2,79 @@
 
 ## Introduction
 
-Let's play High Card! It's an exciting game of luck, skill, and... actually, just luck.
+Let's play High Card! It's an exciting game of luck, skill, and... actually, no, just luck.
 
-You can play a [working version of this game here](https://git.generalassemb.ly/pages/parisyee/high-card-js-solution/).
-Play a few times to really understand how its supposed to work.
+High card works such that two players are dealt a card, and the player with the higher card wins.
 
-Now, modify `main.js` so that the game executes properly! No need to touch
-`index.html`, although you will need to open it in your browser to get up and running.
+e.g.
 
-The "interface" for this game consists entirely of alert boxes (aka dialog boxes)
-in your web browser. If you get stuck in an infinite loop of alert boxes, note
-that Chrome gives you the option to "Prevent this page from creating additional
-dialogs" after the first alert box. Clicking this will mute all subsequent alert
-boxes until you close and reopen the page.
+```js
+Player 1 is showing the 2 of Hearts
+Player 2 is showing the J of Hearts
+Player 2 wins!
+```
+
+Run the game with:
+
+```bash
+node main.js
+```
+
+You'll notice there's no output yet, since you'll need to implement the game!
 
 ## Directions
 
-Inside `main.js` you'll find the following methods:
+Open `main.js` in your editor.
 
-- `buildDeck`: Populates the `deck` array with 52 standard playing cards.
-  _NOTE_: each 'card' in the `deck` array should be an object with a value and
-  suite property.
-- `shuffleDeck`: Randomizes the order of `deck`.
-- `getMorePlayers`: Asks the user if they want to add an additional player to
-  the game. If they do, the player is added to the `players` array.
-  If not, the script continues. _NOTE_: each 'player' should be an object with
-  a `name` property. Use `prompt` to ask the users for their player names.
-- `deal`: Assigns one card to each player.
-- `findHighestCard`: Finds the player with the highest card. Aces are high. For now, don't worry about ties, nor about one suit being more valuable than another suit.
-- `announceWinners`: Alerts the card each player drew, their name, and their ranking. For example, "Alice is number 1 with the 9 of Spades! Bob is number 2 with the 6 of diamonds!" (Dialogs are annoying. How could you show all this in one alert box, rather than one for each player?)
-- `playANewGame`: Runs all the previous methods in the proper order.
+Take a look at the starter code, and think about what the predefined variables offer you.
 
-## Hints
+### Write the `buildDeck()` function
+The first function that the game executes is `buildDeck()`. This function should fill the empty `deck` array with 52 cards (4 suits times 13 different card values). Each card should be an object with a property for its `value` and its `suit`, e.g. `{ suit: 'Hearts', value: 'Queen' }` Iterate over the `suits` and `values` arrays to make these cards.
 
-- Methods you will definitely need to use:
-	- `Math.random()`
-	- `alert()`
-	- `prompt()`
-- How can you make Javascript "remember" what `this` is?
-- Some methods that you might want to research, but by no means have to use:
-	- `array.sort()`:
-		```js
-		array.sort(function(itemA, itemB){
+### Write the `dealCardsToPlayers()` function
 
-		});
-		```
-	- `array.indexOf()`
-	- `array.forEach()`:
-		```js
-		array.forEach(function(item, index){
+After the deck has been built, the `playGame()` function executes, and calls the `dealCardsToPlayers()` function. This function should set two random cards in the deck to `player1Card` and `player2Card`, and then remove them from the deck. The [`.splice()` method](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/splice#Remove_1_element_from_index_3) can be useful here.
 
-		});
-		```
-	- `array.push()`
-	- `array.pop()`
-	- `array.unshift()`
+### Write the `announceCards()` function
 
-## Bonus 1
+Now that the cards have been dealt, the `announceCards()` function should act as the dealer announcing what card each player has, like this:
 
-If there's a tie, announce "It's a tie between [name] and [name] with the [value] of [suit]!"
+```
+Player 1 is showing the 5 of Spades
+Player 2 is showing the Jack of Diamonds
+```
 
-## Bonus 2
+### Write the `cardToRank()` function
 
-If there's a tie, deal all the players new cards.
+To check who won the game, we need to compare the player's cards. This is going to be tricky, since the values of a card could be `1` and `Queen`, and what sense does `1 < Queen` make?
 
-## Bonus 3
+To make things simpler on us, let's write the `cardToRank()` function which accepts a card and returns an integer "rank" for it. A card's rank will be a number between 2 and 14, based on the card's value. A `2 of Spades` will have a rank of `2`, `6 of Hearts` will have a rank of `6`. For face cards, the ranks should be: `Jack = 11, Queen = 12, King = 13, Ace = 14`.
 
-Eliminate ties altogether. Spades > Hearts > Diamonds > Clubs.
+### Write the `announceWinner()` function
 
-I would strongly advise you add a thrid property, `rank` to
-each card. This would be an integer value which indicates the card's ranking in
-a 52 card deck. This will make comparing cards much easier later on. (You can
-just compare rank instead of comparing both value and suit);
+Now that the cards have been dealt, it's time to announce the winner! Write some logic to decide which player has the higher card using the `cardToRank()` function, and log out who won like this:
 
-## Bonus 4
+```
+Player 2 wins!
+```
 
-Turn the game into a series of "turns". After each round, deal all players new
-cards. Keep track of who has won the most rounds. Announce them as the winner.
+If there's a tie, the game should log out:
+
+```
+It's a tie!
+```
+
+### Write the `returnCardsToDeck()` function
+
+Put the `player1Card` and `player2Card` back in the `deck` array.
 
 
-## Bonus 5
+## Bonus
 
-Make this game run as an actual webpage -- not in alert boxes.
+### Keep playing!
 
-# Submission
+Make the game run over and over and over again.
 
-- This assignment is **due at 11:00 PM on Sunday night, April 29th, 2018.**
-- Fork and clone this repo, finish your work and push it up.
-- Submit an issue ticket on **this** repository with you **full name as the title** and the **link to your forked repository as the issue body**.
+### Keep score
 
+Keep track of how many games each player won. Log out the current score after each game.
