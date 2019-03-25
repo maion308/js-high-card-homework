@@ -4,6 +4,10 @@ const deck = [];
 let player1Card = null;
 let player2Card = null;
 
+function random(array) {
+  return array.splice(Math.floor(Math.random() * array.length),1)[0];
+}
+
 function buildDeck() {
   for (let i = 0; i < values.length; i++) {
     for (let j = 0; j < suits.length; j++) {
@@ -14,9 +18,13 @@ function buildDeck() {
 }
 
 function dealCardsToPlayers() {
+  player1Card = random(deck);
+  player2Card = random(deck);
 }
 
 function announceCards() {
+  console.log(`Player 1 has the ${player1Card.value} of ${player1Card.suit}.`);
+  console.log(`Player 2 has the ${player2Card.value} of ${player2Card.suit}.`);
 }
 
 function cardToRank(card) {
