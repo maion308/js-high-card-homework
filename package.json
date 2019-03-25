@@ -1,0 +1,19 @@
+{
+  "name": "js-high-card-homework",
+  "version": "1.0.0",
+  "description": "## Introduction",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://git.generalassemb.ly/soleilyasmina/js-high-card-homework.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "readline-sync": "^1.4.9"
+  }
+}

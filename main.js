@@ -1,3 +1,5 @@
+const prompt = require('readline-sync');
+
 const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
 const suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
 const deck = [];
@@ -14,7 +16,6 @@ function buildDeck() {
       deck.push({value: values[i], suit: suits[j], rank: i});
     }
   }
-  console.log(deck);
 }
 
 function dealCardsToPlayers() {
@@ -49,11 +50,19 @@ function returnCardsToDeck() {
   deck.push(player1Card, player2Card);
 }
 
+function playAgain() {
+  return prompt.question('Would you like to play again? y/n\n') === 'y';
+}
+
 function playGame() {
-  dealCardsToPlayers();
-  announceCards();
-  announceWinner();
-  returnCardsToDeck();
+  let playing = true;
+  while (playing) {
+    dealCardsToPlayers();
+    announceCards();
+    announceWinner();
+    returnCardsToDeck();
+    playing = playAgain();
+  }
 }
 
 buildDeck();
