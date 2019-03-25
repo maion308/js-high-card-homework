@@ -28,9 +28,21 @@ function announceCards() {
 }
 
 function cardToRank(card) {
+  return values.indexOf(card.value);
 }
 
 function announceWinner() {
+  switch(true) {
+    case cardToRank(player1Card) > cardToRank(player2Card):
+      console.log('Player 1 Wins!');
+      break;
+    case cardToRank(player1Card) < cardToRank(player2Card):
+      console.log('Player 2 Wins!');
+      break;
+    default:
+      console.log('It\'s a tie!');
+      break;
+  }
 }
 
 function returnCardsToDeck() {
