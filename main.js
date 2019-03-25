@@ -46,6 +46,7 @@ function announceWinner() {
 }
 
 function returnCardsToDeck() {
+  deck.push(player1Card, player2Card);
 }
 
 function playGame() {
