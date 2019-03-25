@@ -18,6 +18,7 @@ let player2Card = null;
 
  const displayCard = card => {
    for (let i = 0; i < 6; i++) {
+     let { value } = card;
      switch(i) {
        case 0:
        case 2:
@@ -26,12 +27,12 @@ let player2Card = null;
           console.log(chalk.bgWhite.black(visual[i]));
           break;
        case 1:
-          if (card.value === '10') {
-            console.log(chalk.bgWhite.black(visual[i].substring(0,2)+card.value+visual[1].substring(3)));
+          if (value == '10') {
+            console.log(chalk.bgWhite.black(visual[i].substring(0,2)+value+visual[1].substring(3)));
             break;
           }
-         if (parseInt(card.rank) > 8) card.value = card.value.substring(0,1);
-          console.log(chalk.bgWhite.black(visual[i].substring(0,2)+card.value+visual[1].substring(2)));
+         if (parseInt(card.rank) > 8) value = value.substring(0,1);
+          console.log(chalk.bgWhite.black(visual[i].substring(0,2)+value+visual[1].substring(2)));
           break;
        case 4:
        let cardIcon;
