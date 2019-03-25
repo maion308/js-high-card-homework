@@ -1,10 +1,59 @@
 const prompt = require('readline-sync');
+const chalk = require('chalk');
 
 const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
 const suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
 const deck = [];
 let player1Card = null;
 let player2Card = null;
+
+ const visual =
+['┏━━━━━━━━━┓ ',
+ '┃        ┃ ',
+ '┃         ┃ ',
+ '┃         ┃ ',
+ '┃        ┃ ',
+ '┗━━━━━━━━━┛ ']
+ ;
+
+ const displayCard = card => {
+   for (let i = 0; i < 6; i++) {
+     switch(i) {
+       case 0:
+       case 2:
+       case 3:
+       case 5:
+          console.log(chalk.bgWhite.black(visual[i]));
+          break;
+       case 1:
+          if (card.value === '10') {
+            console.log(chalk.bgWhite.black(visual[i].substring(0,2)+card.value+visual[1].substring(3)));
+            break;
+          }
+         if (parseInt(card.rank) > 8) card.value = card.value.substring(0,1);
+          console.log(chalk.bgWhite.black(visual[i].substring(0,2)+card.value+visual[1].substring(2)));
+          break;
+       case 4:
+       let cardIcon;
+        switch (card.suit.toLowerCase()) {
+          case 'diamonds':
+            cardIcon = '♦️';
+            break;
+          case 'hearts':
+            cardIcon = '♥️';
+            break;
+          case 'clubs':
+            cardIcon = '♣️';
+            break;
+          case 'spades':
+            cardIcon = '♠️';
+            break;
+          }
+         console.log(chalk.bgWhite.black(visual[i].substring(0,7)+cardIcon+visual[1].substring(7)));
+         break;
+     }
+   }
+ }
 
 function random(array) {
   return array.splice(Math.floor(Math.random() * array.length),1)[0];
@@ -24,7 +73,9 @@ function dealCardsToPlayers() {
 }
 
 function announceCards() {
+  displayCard(player1Card);
   console.log(`Player 1 has the ${player1Card.value} of ${player1Card.suit}.`);
+  displayCard(player2Card);
   console.log(`Player 2 has the ${player2Card.value} of ${player2Card.suit}.`);
 }
 
