@@ -114,6 +114,7 @@ function playGame() {
     returnCardsToDeck();
     playing = playAgain();
   }
+  process.exit();
 }
 
 buildDeck();
