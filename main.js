@@ -5,6 +5,12 @@ let player1Card = null;
 let player2Card = null;
 
 function buildDeck() {
+  for (let i = 0; i < values.length; i++) {
+    for (let j = 0; j < suits.length; j++) {
+      deck.push({value: values[i], suit: suits[j], rank: i});
+    }
+  }
+  console.log(deck);
 }
 
 function dealCardsToPlayers() {
