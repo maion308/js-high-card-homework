@@ -3,33 +3,35 @@ const suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
 const deck = [];
 let player1Card = null;
 let player2Card = null;
-
 function buildDeck() {
-  let cards = [
-    {
-      rank: 'queen',
-      suit: 'hearts',
-      cardImage: "images/queen-of-hearts.png"
-    },
-    {
-      rank: 'queen',
-      suit: 'diamond',
-      cardImage: "images/queen-of-diamonds.png"
-    },
-    {
-      rank: 'king',
-      suit: 'hearts',
-      cardImage: "images/king-of-hearts.png"
-    },
-    {
-      rank: 'king',
-      suit: 'diamonds',
-      cardImage: "images/king-of-diamonds.png"
-    }
-    ];
+
+values.forEach((value)=>{
+  suits.forEach((suit)=>{
+  deck.push(value + ' of ' + suit);
+  })
+})
+  let arrayShuffle = function(arr) {
+  let newPos,
+      temp;
+
+      for(i = arr.length - 1; i > 0; i--){
+        newPos = Math.floor(Math.random() * (i + 1));
+
+        temp = arr[i];
+        arr[i] = arr[newPos];
+        arr[newPos] = temp;
+      }
+      return arr
+};
+
+let newArray = arrayShuffle(deck);
+
+console.log(newArray);
 }
 
+
 function dealCardsToPlayers() {
+
 }
 
 function announceCards() {
@@ -53,10 +55,3 @@ function playGame() {
 
 buildDeck();
 playGame();
-
-
-line one
-line two 
-line three 
-line four     
-delete this line    
