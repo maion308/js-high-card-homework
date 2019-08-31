@@ -31,7 +31,20 @@ function dealCardsToPlayers() {
 }
 let newArray = arrayShuffle(deck);
 
-console.log(newArray);
+newArray.forEach((item, idx)=>{
+  player1Card = newArray.splice(idx,1)
+  console.log(player1Card.length);
+  console.log(newArray.length);
+  if(newArray.length <= 26){
+    console.log(`out of cards`);
+  }
+})
+
+// player1Card.forEach((item)=>{
+//   console.log(`player 1 dealt card ${player1Card}`);
+//   player1Card.splice(item,1);
+//   console.log(player1Card.length);
+// })
 
 }
 
