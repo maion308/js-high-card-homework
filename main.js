@@ -1,15 +1,21 @@
-const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
-const suits = ["Clubs", "Diamonds", "Hearts", "Spades"];
-const deck = [];
+const values    = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
+const suits     = ["Clubs", "Diamonds", "Hearts", "Spades"];
+const deck      = [];
 let player1Card = null;
 let player2Card = null;
-function buildDeck() {
 
-values.forEach((value)=>{
-  suits.forEach((suit)=>{
+
+function buildDeck() {
+  values.forEach((value)=>{
+  suits.forEach((suit)  =>{
   deck.push(value + ' of ' + suit);
   })
 })
+return deck
+};
+
+function dealCardsToPlayers() {
+   // Shuffle deck using Fisher-Yates shuffle alogorithm in javascript language
   let arrayShuffle = function(arr) {
   let newPos,
       temp;
@@ -22,15 +28,10 @@ values.forEach((value)=>{
         arr[newPos] = temp;
       }
       return arr
-};
-
+}
 let newArray = arrayShuffle(deck);
 
 console.log(newArray);
-}
-
-
-function dealCardsToPlayers() {
 
 }
 
