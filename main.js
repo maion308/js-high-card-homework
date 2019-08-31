@@ -5,6 +5,28 @@ let player1Card = null;
 let player2Card = null;
 
 function buildDeck() {
+  let cards = [
+    {
+      rank: 'queen',
+      suit: 'hearts',
+      cardImage: "images/queen-of-hearts.png"
+    },
+    {
+      rank: 'queen',
+      suit: 'diamond',
+      cardImage: "images/queen-of-diamonds.png"
+    },
+    {
+      rank: 'king',
+      suit: 'hearts',
+      cardImage: "images/king-of-hearts.png"
+    },
+    {
+      rank: 'king',
+      suit: 'diamonds',
+      cardImage: "images/king-of-diamonds.png"
+    }
+    ];
 }
 
 function dealCardsToPlayers() {
@@ -31,3 +53,10 @@ function playGame() {
 
 buildDeck();
 playGame();
+
+
+line one
+line two 
+line three 
+line four     
+delete this line    
