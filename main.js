@@ -2,6 +2,10 @@
 
 const values    = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
 const suits = ['♠️ ', '❤️ ', '♣', '♦️ '];
+let jack = values["Jack"] = 11;
+let queen = values["Queen"] = 12;
+let king = values["King"] = 13;
+let ace = values["Ace"] = 14;
 const deck      = [];
 let player1Card = null;
 let player2Card = null;
@@ -70,7 +74,7 @@ newArray.forEach((item, idx)=>{
 
 }
 
-function announceCards() {
+function announceCards(player1,player2) {
 
   player1Card.forEach((dealt)=>{
     return player1Card[dealt];
@@ -93,16 +97,13 @@ function announceCards() {
 })
 // console.log(player1Card);
 // console.log(player2Card);
-
-return player1Card;
-return player2Card;
-
 }
 
 // console.log(dealt_card_1);
 // console.log(dealt_card_2);
+
 function cardToRank(card) {
- 
+ console.log("hello")
 }
 
 function announceWinner() {
@@ -114,6 +115,7 @@ function returnCardsToDeck() {
 function playGame() {
   dealCardsToPlayers();
   announceCards();
+  cardToRank();
   announceWinner();
   returnCardsToDeck();
 }
