@@ -1,124 +1,95 @@
-
-
-const values    = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
+// set up global variables
+const values = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"];
 const suits = ['♠️ ', '❤️ ', '♣', '♦️ '];
-let jack = values["Jack"] = 11;
-let queen = values["Queen"] = 12;
-let king = values["King"] = 13;
-let ace = values["Ace"] = 14;
-const deck      = [];
-let player1Card = null;
-let player2Card = null;
-const dealt_card_1 = [];
-const dealt_card_2 = [];
-const p1Score = 0;
-const p2Score = 0;
+const deck = [];
+// set 2 players inside a 3d array for easier output using index to distribute
+const players = [[],[]];
+ 
+// Nest everything inside the playGame function
+function playGame(){
 
-
-function buildDeck() {
-  values.forEach((value)=>{
-  suits.forEach((suit)  =>{
-  deck.push(value + ' of ' + suit);
-  })
-})
-return deck
-};
-
-function dealCardsToPlayers() {
-   // Shuffle deck using Fisher-Yates shuffle alogorithm in javascript language
-  let arrayShuffle = function(arr) {
-  let newPos,
-      temp;
-
-      for(i = arr.length - 1; i > 0; i--){
-        newPos = Math.floor(Math.random() * (i + 1));
-
-        temp = arr[i];
-        arr[i] = arr[newPos];
-        arr[newPos] = temp;
-      }
-      return arr
+// build the deck using for..in object iterator or... enumerator
+function buildDeck(){
+for(suit in suits){
+  for(val in values){
+    var card = {
+      suit: suits[suit],
+      num: values[val],
+      // use parseInt with the cardValue property so we can rank the cards
+      // and check for inequality which we mainly need for the J Q K A cards
+      cardValue:parseInt(val) + 2
+    }
+    deck.push(card)
+  }
+ }
+// console.log(cards)
 }
-let newArray = arrayShuffle(deck);
-
-newArray.forEach((item, idx)=>{
-  player1Card = newArray.splice(idx,1);
-  console.log(player1Card);
-  dealt_card_1.unshift(player1Card.shift());
-  // console.log(player1Card.length);
-  // console.log(newArray.length);
-  // if(newArray.length <= 26){
-  //   console.log(`out of cards`);
-  // }
-  return player1Card;
-})
-
-newArray.forEach((item, idx)=>{
-  player2Card = newArray.splice(idx,1);
-  return player2Card;
-
-  //testing trying different methods
-  // console.log(player2Card);
-})
-
-// player1Card.forEach((item)=>{
-//   console.log(`player1 dealt ${item}`)
-
-// })
-
-// player1Card.forEach((item)=>{
-//   console.log(`player 1 dealt card ${player1Card}`);
-//   player1Card.splice(item,1);
-//   console.log(player1Card.length);
-// })
-
+// Shuffle deck using Fisher-Yates shuffle alogorithm in javascript
+function shuffleArray(array){
+  for(i = array.length -1; i > 0; i--){
+    var newNum = Math.floor(Math.random() * (i + 1));
+    // The three lines below are moving the items around
+    // basically swapping the index 
+    // the third step makes a big difference in getting random numbers
+    var temp = array[i];
+    array[i] = array[newNum];
+    array[newNum] = temp
+  }
+  return array
 }
 
-function announceCards(player1,player2) {
+// deal cards for 2 players within a 3d array
+function dealCards(array){
+for(i = 0; i < array.length; i++){
+  if(i % 2 == 0){
+    players[0].push(array[i]);
+  }else {
+    players[1].push(array[i]);
+  }
+ }
+ // by using the shift method we are taking the values out
+ // of each player while storing that value into card1 and card2
+ // this is needed to make sure we don't play forever
+ // and the cards will empty out
+  var card1 = players[0].shift();
+  var card2 = players[1].shift();
+  // create a pot so we can keep score 
+  var pot = [card1, card2];
 
-  player1Card.forEach((dealt)=>{
-    return player1Card[dealt];
-    dealt_card_1.push(player1Card.pop());
-  // console.log(`player 1 dealt ${dealt}`)
-  // console.log(player1Card[dealt])
-  // console.log(player1Card);
-  return dealt_card_1
-  // console.log(player1Card);
-  // console.log(dealt_card_1);
-  // console.log(player1Card.length)
-})
-  player2Card.forEach((dealt)=>{
-    return player2Card[dealt]
-    dealt_card_2.push(player2Card.pop());
-  // console.log(`player 2 dealt ${dealt}`)
-  // console.log(player2Card.length)
-  // console.log(player2Card)
-  return dealt_card_2
-})
-// console.log(player1Card);
-// console.log(player2Card);
+  //check for winner inside this function here
+  checkWinner(card1, card2, pot);
+  p1_score = players[0].length;
+  p2_score = players[1].length;
+  console.log(`Player1 score: ${p1_score} | Player2 score: ${p2_score}`)
+  console.log("Game Over")
 }
 
-// console.log(dealt_card_1);
-// console.log(dealt_card_2);
-
-function cardToRank(card) {
- console.log("hello")
+// check for winner check for inequality
+function checkWinner(card1, card2, pot){
+  console.log(card1, card2);
+  if(card1.cardValue > card2.cardValue){
+    console.log("Player 1 wins!!!");
+    players[0] = players[0].concat(pot);
+  }
+  else if(card1.cardValue < card2.cardValue){
+    console.log("Player 2 wins!!!");
+    players[1] = players[1].concat(pot);
+  }
+  else {
+    console.log("tie");
+    playGame();
+    // enter battle mode
+  }
+  console.log(players)
 }
 
-function announceWinner() {
-}
 
-function returnCardsToDeck() {
-}
-
-function playGame() {
-  dealCardsToPlayers();
-  announceCards();
-  cardToRank();
-  announceWinner();
-  returnCardsToDeck();
-}
 
 buildDeck();
+shuffleArray(deck);
+dealCards(deck);
+// checkWinner();
+
+}
+
 playGame();
